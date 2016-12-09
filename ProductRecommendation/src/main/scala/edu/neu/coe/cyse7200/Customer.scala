@@ -29,7 +29,7 @@ case class Customer(customerCode: Int, age: Int, sex: String, income:Double, seg
   * @param residenceIndex Customer's Residence Index
   * @param foreignIndex Customer's Foreign Index
   */
-case class Address(primaryAddress:Boolean, country:String, provinceName:String, provinceCode:Int, residenceIndex:String, foreignIndex:String ){
+case class Address(primaryAddress:Boolean, country:String, provinceName:String, provinceCode:Int, residenceIndex:Boolean, foreignIndex:Boolean ){
   override def toString: String = s"$primaryAddress,$country,$provinceName,$provinceCode,$residenceIndex,$foreignIndex"
 }
 
@@ -78,8 +78,10 @@ object Address{
     params match {
       case primaryAddress :: country :: provinceName :: provinceCode :: residenceIndex :: foreignIndex :: Nil=>
                                 apply( {if(primaryAddress.replace(" ","").toInt == 1) true else false},
-                                  country, provinceName, provinceCode.replace(" ", "").toInt,
-                                  residenceIndex.replace(" ",""), foreignIndex.replace(" ",""))
+                                  country, provinceName,
+                                  provinceCode.replace(" ", "").toInt,
+                                  {residenceIndex.replace(" ","").toUpperCase() match {case "S" => true case _ => false}},
+                                  {foreignIndex.replace(" ","").toUpperCase match  {case "S" => true case _ => false}})
       case _ => throw new Exception(s"parse error in Name: $this")
     }
   }
