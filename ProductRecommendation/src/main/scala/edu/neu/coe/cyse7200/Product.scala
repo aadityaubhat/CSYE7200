@@ -32,7 +32,7 @@ package edu.neu.coe.cyse7200
   */
 
 
-case class Product(customercode:Int,date:String, savingAcc:Boolean, gaurantees:Boolean, currentAcc:Boolean, derivedAcc:Boolean, payrollAcc:Boolean, juniorAcc:Boolean, moreParticularAcc:Boolean, particularAcc:Boolean, particularPlusAccion:Boolean, shorttermDeposit:Boolean, medtermDeposit:Boolean, longtermDeposit:Boolean, eAccount:Boolean, funds:Boolean, mortgage:Boolean, pensionPlan:Boolean, loan:Boolean, taxes:Boolean, creditCard:Boolean, securities:Boolean, homeAcc:Boolean, payrollNomina:String, pensionNomina:String, directDebit:Boolean){
+case class Product(customercode:Int,date:String, savingAcc:Boolean, gaurantees:Boolean, currentAcc:Boolean, derivedAcc:Boolean, payrollAcc:Boolean, juniorAcc:Boolean, moreParticularAcc:Boolean, particularAcc:Boolean, particularPlusAccion:Boolean, shorttermDeposit:Boolean, medtermDeposit:Boolean, longtermDeposit:Boolean, eAccount:Boolean, funds:Boolean, mortgage:Boolean, pensionPlan:Boolean, loan:Boolean, taxes:Boolean, creditCard:Boolean, securities:Boolean, homeAcc:Boolean, payrollNomina:Boolean, pensionNomina:Boolean, directDebit:Boolean){
   override def toString: String = s"$customercode,$date,$savingAcc,$gaurantees,$currentAcc,$derivedAcc,$payrollAcc,$juniorAcc,$moreParticularAcc,$particularAcc,$particularPlusAccion,$shorttermDeposit,$medtermDeposit,$longtermDeposit,$eAccount,$funds,$mortgage,$pensionPlan,$loan,$taxes,$creditCard,$securities,$homeAcc,$payrollNomina,$pensionNomina,$directDebit"
 }
 
@@ -46,34 +46,34 @@ object Product extends App{
 
   def apply(splitRow:Seq[String]):Product={
 
-    val date = splitRow(0).replace(" ","")
+    val date = splitRow.head.replace(" ","")
 
-    val customerCode = splitRow(1).replace(" ","").toInt
+    val customerCode = splitRow(1).replace(" ","").toDouble.toInt
 
-    val savingAcc = intToBool (splitRow(24).replace(" ","").toInt)
-    val gaurantees=intToBool(splitRow(25).replace(" ","").toInt)
-    val currentAcc=intToBool(splitRow(26).replace(" ","").toInt)
-    val derivedAcc=intToBool (splitRow(27).replace(" ","").toInt)
-    val payrollAcc=intToBool (splitRow(28).replace(" ","").toInt)
-    val juniorAcc=intToBool (splitRow(29).replace(" ","").toInt)
-    val moreParticularAcc= intToBool (splitRow(30).replace(" ","").toInt)
-    val particularAcc= intToBool (splitRow(31).replace(" ","").toInt)
-    val particularPlusAccion= intToBool (splitRow(32).replace(" ","").toInt)
-    val shorttermDeposit= intToBool (splitRow(33).replace(" ","").toInt)
-    val medtermDeposit= intToBool (splitRow(34).replace(" ","").toInt)
-    val longtermDeposit= intToBool (splitRow(35).replace(" ","").toInt)
-    val eAccount= intToBool (splitRow(36).replace(" ","").toInt)
-    val funds= intToBool (splitRow(37).replace(" ","").toInt)
-    val mortgage= intToBool (splitRow(38).replace(" ","").toInt)
-    val pensionPlan= intToBool (splitRow(39).replace(" ","").toInt)
-    val loan= intToBool (splitRow(40).replace(" ","").toInt)
-    val taxes= intToBool (splitRow(41).replace(" ","").toInt)
-    val creditCard= intToBool (splitRow(42).replace(" ","").toInt)
-    val securities= intToBool (splitRow(43).replace(" ","").toInt)
-    val homeAcc= intToBool(splitRow(44).replace(" ","").toInt)
-    val payrollNomina= splitRow(45).replace(" ","")
-    val pensionNomina= splitRow(46).replace(" ","")
-    val directDebit= intToBool(splitRow(47).replace(" ","").toInt)
+    val savingAcc = intToBool (splitRow(24).replace(" ","").toDouble.toInt)
+    val gaurantees=intToBool(splitRow(25).replace(" ","").toDouble.toInt)
+    val currentAcc=intToBool(splitRow(26).replace(" ","").toDouble.toInt)
+    val derivedAcc=intToBool (splitRow(27).replace(" ","").toDouble.toInt)
+    val payrollAcc=intToBool (splitRow(28).replace(" ","").toDouble.toInt)
+    val juniorAcc=intToBool (splitRow(29).replace(" ","").toDouble.toInt)
+    val moreParticularAcc= intToBool (splitRow(30).replace(" ","").toDouble.toInt)
+    val particularAcc= intToBool (splitRow(31).replace(" ","").toDouble.toInt)
+    val particularPlusAccion= intToBool (splitRow(32).replace(" ","").toDouble.toInt)
+    val shorttermDeposit= intToBool (splitRow(33).replace(" ","").toDouble.toInt)
+    val medtermDeposit= intToBool (splitRow(34).replace(" ","").toDouble.toInt)
+    val longtermDeposit= intToBool (splitRow(35).replace(" ","").toDouble.toInt)
+    val eAccount= intToBool (splitRow(36).replace(" ","").toDouble.toInt)
+    val funds= intToBool (splitRow(37).replace(" ","").toDouble.toInt)
+    val mortgage= intToBool (splitRow(38).replace(" ","").toDouble.toInt)
+    val pensionPlan= intToBool (splitRow(39).replace(" ","").toDouble.toInt)
+    val loan= intToBool (splitRow(40).replace(" ","").toDouble.toInt)
+    val taxes= intToBool (splitRow(41).replace(" ","").toDouble.toInt)
+    val creditCard= intToBool (splitRow(42).replace(" ","").toDouble.toInt)
+    val securities= intToBool (splitRow(43).replace(" ","").toDouble.toInt)
+    val homeAcc= intToBool(splitRow(44).replace(" ","").toDouble.toInt)
+    val payrollNomina= intToBool(splitRow(45).replace(" ","").toDouble.toInt)
+    val pensionNomina= intToBool(splitRow(46).replace(" ","").toDouble.toInt)
+    val directDebit= intToBool(splitRow(47).replace(" ","").toDouble.toInt)
 
     Product(customerCode, date, savingAcc,gaurantees,currentAcc,derivedAcc,payrollAcc,juniorAcc,moreParticularAcc,particularAcc,particularPlusAccion,shorttermDeposit,medtermDeposit,longtermDeposit,eAccount,funds,mortgage,pensionPlan,loan,taxes,creditCard,securities,homeAcc,payrollNomina,pensionNomina,directDebit)
 
