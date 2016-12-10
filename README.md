@@ -9,7 +9,7 @@ This repository contains following things
 
 * Data Cleaning - Contains Zeppelin Notebook to clean raw data
 * Exploratory Analysis - Contains Zeppelin Notebook with Exploratory Data Analysis
-* Model Fitting - Contains Zeppelin Notebook for Model Fitting
+* Model Fitting - Contains Zeppelin Notebook for Model Fitting and provides Product Recommendations
 * ProductRecommendation - SBT project to ingest data and create Customer and Product Profile objects
 * Project Planning Presentation - Project Proposal ppt
 * Final Presentation - Project Conclusion ppt
@@ -17,7 +17,9 @@ This repository contains following things
 
 Notes
 
-Zeppelin Notebooks 
+Tools Used : Zeppelin Notebooks, IntelliJ Idea
+
+Programming Language : Scala
 	
 In order to run the zeppelin notebooks on a local machine or cluster, download zeppelin from
 https://zeppelin.apache.org/download.html
