@@ -21,7 +21,7 @@ case class Customer(customerCode: Int, age: Int, sex: String, income:Double, seg
 
 
 /**
-  *
+  * Address class has address related attributes for a customer
   * @param primaryAddress Customer's Primary Address
   * @param country Customer's Country
   * @param provinceName Customer's Province Name
@@ -34,7 +34,7 @@ case class Address(primaryAddress:Boolean, country:String, provinceName:String, 
 }
 
 /**
-  *
+  * BankProfile class has Bank related attributes for a customer
   * @param newIndex Customer New Index
   * @param joinDate Joining Date of Customer
   * @param seniority Customer's Seniority
@@ -49,16 +49,23 @@ case class BankProfile(newIndex:Boolean, joinDate:String, seniority:Int, employe
 object Customer extends App{
 
   def apply(splitRow: Seq[String]): Customer = {
-    //customerCode: Int, age: Int, sex: Char, income:Double, segment: Int, customerType: Int, customerAddress: Address, bankProfile: BankProfile
+
     val customerCode = splitRow(1).replace(" ", "").toInt
-    val age = splitRow(5).replace(" ", "").toInt
-    val sex = splitRow(4)
+
+    val age = splitRow(5).replace(" ", "").toDouble.toInt
+
+    val sex = splitRow(4).replace(" ", "").toUpperCase
+
     val income = splitRow(22).replace(" ","").toDouble
-    val segment = splitRow(23).split("-")(0).replace(" ", "").toInt
-    val customerType = splitRow(23).replace(" ","").toInt
-    //primaryAddress:Boolean, country:String, provinceName:String, provinceCode:Int, residenceIndex:String, foreignIndex:String
+
+    val segment = splitRow(23).split("-")(0).replace(" ", "").replace(""""""", "").toInt
+
+    val customerType = splitRow(11).replace(" ","").toDouble.toInt
+
+    //Address attributes primaryAddress:Boolean, country:String, provinceName:String, provinceCode:Int, residenceIndex:String, foreignIndex:String
     val customerAddress = Address(Seq(splitRow(18),splitRow(3),splitRow(20),splitRow(19),splitRow(13), splitRow(14)))
-    //newIndex:Boolean, joinDate:String, seniority:Int, employeeIndex:Boolean, employeeSpouseIndex:Boolean
+
+    //BankProfile attributes newIndex:Boolean, joinDate:String, seniority:Int, employeeIndex:Boolean, employeeSpouseIndex:Boolean
     val bankProfile = BankProfile(Seq(splitRow(7),splitRow(6),splitRow(8),splitRow(2),splitRow(15)))
 
     Customer(customerCode, age, sex, income, segment, customerType, customerAddress, bankProfile)
@@ -77,7 +84,7 @@ object Address{
   def apply(params: Seq[String]): Address = {
     params match {
       case primaryAddress :: country :: provinceName :: provinceCode :: residenceIndex :: foreignIndex :: Nil=>
-                                apply( {if(primaryAddress.replace(" ","").toInt == 1) true else false},
+                                apply( {if(primaryAddress.replace(" ","").toDouble.toInt == 1) true else false},
                                   country, provinceName,
                                   provinceCode.replace(" ", "").toInt,
                                   {residenceIndex.replace(" ","").toUpperCase() match {case "S" => true case _ => false}},
@@ -91,10 +98,30 @@ object BankProfile{
   def apply(params: Seq[String]): BankProfile = {
     params match {
       case newIndex :: joinDate :: seniority :: employeeIndex :: employeeSpouseIndex :: Nil =>
-        apply({if(newIndex.replace(" ","").toInt == 1) true else false},
-          joinDate, seniority.replace(" ","").toInt,
-          {if(employeeIndex.replace(" ", "").toInt == 1) true else false},
-          {if (employeeSpouseIndex.replace(" ", "").toInt == 1) true else false})
+        apply(
+          newIndex.replace(" ","") match {
+            case "" => false
+            case str => if(str.toDouble.toInt == 1) true else false
+          },
+
+          joinDate,
+
+          {seniority.replace(" ","") match  {
+            case "" => 0
+            case str => str.toDouble.toInt
+          }},
+
+          employeeIndex.replace(" ", "") match {
+            case "" => false
+            case str => if(str.toUpperCase == "N") false else true
+          },
+
+          { employeeSpouseIndex.replace(" ", "") match {
+            case "" => false
+            case str =>  if (str.toDouble.toInt == 1) true else false
+            }
+          })
+
       case _ => throw new Exception(s"parse error in Name: $this")
     }
   }
