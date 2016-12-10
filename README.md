@@ -15,7 +15,9 @@ This repository contains following things
 
 Notes - 
 1. Zeppelin Notebooks 
+	
 	In order to run the zeppelin notebooks on a local machine or cluster, download zeppelin from
+
 	https://zeppelin.apache.org/download.html
 
 	Configure the interpreters in Zeppelin according to your requirements
