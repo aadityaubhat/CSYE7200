@@ -13,8 +13,9 @@ This repository contains following things
 * Final Presentation - Project Conclusion ppt
 
 
-Notes - 
-1. Zeppelin Notebooks 
+##Notes 
+
+Zeppelin Notebooks 
 	
 	In order to run the zeppelin notebooks on a local machine or cluster, download zeppelin from
 
@@ -30,7 +31,7 @@ Notes -
 
 	Run the imported notebooks
 
-2. SBT Project
+SBT Project
 	To run the sbt project, clone the ProductRecommendation project.
 
 	Run the sbt clean test
